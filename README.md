@@ -116,7 +116,7 @@ STITCH:
 The main STITCH functions are called in Matlab.
 
 1. First pre-process the data to perform total counts normalization and (if necessary) identify highly variable genes for each timepoint.  The output is an updated version of the DataSet object.  
-  ```DataSet = stitch_preprocess(DataSet);```
+  ```DataSet = stitch_preprocess(DataSet)```
 
 2. Run the main STITCH pipeline.  This generates a Matlab Graph object.  
   ```G = stitch(DataSet)```
