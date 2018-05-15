@@ -3,7 +3,7 @@ STITCH
 
 STITCH assembles a graph manifold from time series single-cell RNA sequencing data.  STITCH acknowledges that the gene expression signatures defining a complex biological process (e.g. embryonic development) can change dramatically over time.  Rather than projecting data from several timepoints into a single low-dimensional latent space, STITCH instead assembles a manifold that is defined through a series of overlapping, locally-defined PCA subspaces.
 
-1. Non-mutual k-nearest-neighborhoods are first obtained for each cell in timepoint _i_. Cells are projected into a PCA subspace defined by _all_ cells from timepoint _i_ and are queried from timepoints _i_ (within-timepoint edges) and _i-1_ (link edges).  
+1. Non-mutual k-nearest-neighborhoods are first obtained for each cell in timepoint _i_. Neighbor edges are queried from timepoints _i_ (within-timepoint edges) and _i-1_ (link edges) after projecting into a PCA subspace defined by _all_ cells from timepoint _i_.  
 2. Outgoing edges are then subject to local and global neighborhood restictions.
 3. The graph is restricted to mutual edges.
 
