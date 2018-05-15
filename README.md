@@ -29,9 +29,9 @@ An example DataSet from [Wagner et. al. 2018](http://science.sciencemag.org/cont
 
 
 ### Settings ###
-Parameter settings for both the pre-processing and main STITCH pipelines can be specified using optional name/value pairs.  Defaults implement the original settings used in [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362).
+Parameter settings for both the pre-processing and main STITCH functions can be specified using optional name/value pairs.  Defaults implement the original settings used in [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362).
 
-Pre-processing:  
+Preprocess Data:  
 
 ```
 'topVarGenes'
