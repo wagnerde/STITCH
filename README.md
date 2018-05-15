@@ -125,10 +125,10 @@ The main STITCH functions are called in Matlab.
   ```graph_to_dot(adjacency(G), 'directed', 0, 'filename', 'gephi_graph.dot')```
 
 4. Gephi coordinates can be exported as a .NET file and imported back to Matlab.  The example dataset provides pre-computed XY coordinates.  
-  ```gephiXY = stitch_import_gephi('gephi_export.net')```
+  ```XY = stitch_import_gephi('gephi_export.net')```
 
 5. Plot the STITCH graph using Gephi coordinates.    
-  ```stitch_plot_graph(G, gephiXY)```
+  ```stitch_plot_graph(G, XY)```
 
 
 
