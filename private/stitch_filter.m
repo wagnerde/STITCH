@@ -22,7 +22,7 @@ EdgeTable = stitch_merged.EdgeTable;
 NodeTable = stitch_merged.NodeTable;
 disp('Filtering graph...');
 disp(['# starting nodes: ', num2str(height(NodeTable))]);
-disp(['# starting edges: ', num2str(round(height(EdgeTable)/1000,1)), 'K']);
+disp(['# starting edges: ', num2str(round(height(EdgeTable)/1000)), 'K']);
 
 % (1) filter based on hard thresholds for global and local neighbor distances
 graph_edge_hard_thresh_fail = (EdgeTable.D_local > settings.graph_max_D_local | EdgeTable.D_global > settings.graph_max_D_global) & EdgeTable.InternalEdge;    
@@ -30,13 +30,13 @@ link_edge_hard_thresh_fail = (EdgeTable.D_local > settings.link_max_D_local | Ed
 edge_hard_thresh_fail = graph_edge_hard_thresh_fail | link_edge_hard_thresh_fail;
 EdgeTable(edge_hard_thresh_fail,:) = [];  
 disp(['# nodes after distance filters: ', num2str(height(NodeTable))]);
-disp(['# edges after distance filters: ', num2str(round(height(EdgeTable)/1000,1)), 'K']);
+disp(['# edges after distance filters: ', num2str(round(height(EdgeTable)/1000)), 'K']);
 
 % (2) retain only the basis-outgoing edges that had a mutual incoming edge
 EdgeTable = stitch_filter_nonmutual_edges(EdgeTable);
 EdgeTable(EdgeTable.BasisOutgoing == 0,:) = [];
 disp(['# nodes after mutual edge filter: ', num2str(height(NodeTable))]);
-disp(['# edges after mutual edge filter: ', num2str(round(height(EdgeTable)/1000,1)), 'K']);
+disp(['# edges after mutual edge filter: ', num2str(round(height(EdgeTable)/1000)), 'K']);
 
 % (3) restrict graph to k_final outgoing edges per node
 % For each node, consider all graph and link edges built in that node's 
@@ -62,13 +62,13 @@ UniqueEdgeID_to_keep_original_ind = ismember(EdgeTable.UniqueEdgeID, UniqueEdgeI
 EdgeTable = EdgeTable(UniqueEdgeID_to_keep_original_ind,:);
 EdgeTable = stitch_filter_duplicate_edges(EdgeTable);    
 disp(['# nodes after k_final filter: ', num2str(height(NodeTable))]);
-disp(['# edges after k_final filter: ', num2str(round(height(EdgeTable)/1000,1)), 'K']);
+disp(['# edges after k_final filter: ', num2str(round(height(EdgeTable)/1000)), 'K']);
 
 % (4) isolate the 'giant' component (connected component #1)
 G = graph(EdgeTable, NodeTable); 
 G = stitch_filter_giant_component(G);
 disp(['# nodes in giant: ', num2str(numnodes(G))]);
-disp(['# edges in giant: ', num2str(round(numedges(G)/1000,1)), 'K']);
+disp(['# edges in giant: ', num2str(round(numedges(G)/1000)), 'K']);
 
 % calculate adjacency matrix
 A = adjacency(G);
