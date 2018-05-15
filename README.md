@@ -18,7 +18,7 @@ STITCH was developed and used to analyze zebrafish embryonic development in:
 ## Usage ##
 
 ### Inputs ###
-Inputs are supplied to STITCH as a Matlab object called "DataSet".  "DataSet" is a structure array the following fields and one record for each timepoint:
+Input data are supplied to STITCH as a Matlab object called "DataSet".  "DataSet" is a structure array the following fields and one record for each timepoint:
 1. **DataSet.X**. A UMI-filtered counts matrix; rows=transcripts, columns=cells (REQUIRED).  X can be supplied as a sparse matrix. 
 2. **DataSet.name**. A unique string identifier for each timepoint (REQUIRED).
 3. **DataSet.ind**.  A numeric index for each timepoint (REQUIRED).
