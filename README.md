@@ -7,7 +7,7 @@ STITCH assembles a graph manifold from time series single-cell RNA sequencing da
 2. Outgoing edges are then subject to local and global neighborhood restictions.
 3. The graph is restricted to mutual edges.
 
-STITCH does not use pre-defined clusters to guide construction of the manifold.  Nor does it make topological assumptions (e.g. a "tree-like" organization) about the underlying data.  A STITCH graph can be used as a starting point for data visualization and exploration by generating a force-directed layout (e.g. ForceAtlas2 in [Gephi](https://gephi.org/)).
+STITCH is heuristic but it does not use pre-defined clusters to guide construction of the manifold.  Nor does it make topological assumptions (e.g. a "tree-like" organization) about the underlying data.  A STITCH graph can be used as a starting point for data visualization and exploration by generating a force-directed layout (e.g. ForceAtlas2 in [Gephi](https://gephi.org/)).
 
 This version of STITCH is written in Matlab and requires the 'Statistics and Machine Learning Toolbox'.
 
