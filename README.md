@@ -115,20 +115,20 @@ STITCH:
 
 The main STITCH functions are called in Matlab.
 
-1. First pre-process the data to perform total counts normalization and (if necessary) identify highly variable genes for each timepoint.  The output is an updated version of the DataSet object.  
+1. First preprocess the data to perform total counts normalization and (if necessary) identify highly variable genes for each timepoint.  The output is an updated version of the DataSet object.  
   ```DataSet = stitch_preprocess(DataSet)```
 
-2. Run the main STITCH pipeline.  This generates a Matlab Graph object.  
+2. Run the main STITCH pipeline.  This generates a Matlab graph object.  
   ```G = stitch(DataSet)```
 
 3. We recommend visualizing STITCH graphs using the ForceAtlas2 layout in [Gephi](https://gephi.org/). The Matlab graph object can be imported into Gephi from DOT format, for example by using the 'graph_to_dot' function from [Matlab-Graphviz interface](https://www.mathworks.com/matlabcentral/fileexchange/4518-matlab-graphviz-interface) by Leon Peshkin.  
   ```graph_to_dot(adjacency(G), 'directed', 0, 'filename', 'gephi_graph.dot')```
 
-4. Gephi coordinates can be saved as a .NET file and imported back to Matlab.  The example dataset provides pre-computed XY coordinates.  
-  ```XY = stitch_import_gephi('gephi_export.net')```
+4. Gephi coordinates can be exported as a .NET file and imported back to Matlab.  The example dataset provides pre-computed XY coordinates.  
+  ```gephiXY = stitch_import_gephi('gephi_export.net')```
 
 5. Plot the STITCH graph using Gephi coordinates.    
-  ```stitch_plot_graph(G, XY)```
+  ```stitch_plot_graph(G, gephiXY)```
 
 
 
