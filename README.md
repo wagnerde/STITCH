@@ -9,7 +9,7 @@ STITCH assembles a graph manifold from time series single-cell RNA sequencing da
 
 STITCH is heuristic but it does not use pre-defined clusters to guide construction of the manifold.  Nor does it make topological assumptions (e.g. a "tree-like" organization) about the underlying data.  A STITCH graph can be used as a starting point for data visualization and exploration by generating a force-directed layout (e.g. ForceAtlas2 in [Gephi](https://gephi.org/)).
 
-This version of STITCH is written in Matlab and requires the 'Statistics and Machine Learning Toolbox'.
+This version of STITCH was written in Matlab (2017a) and requires the 'Statistics and Machine Learning Toolbox'.
 
 STITCH was developed and used to analyze zebrafish embryonic development in:  
 **Single-cell mapping of gene expression landscapes and lineage in the zebrafish embryo.**  Wagner DE, Weinreb C, Collins ZM, Briggs JA, Megason SG, Klein AM. Science 26 Apr 2018. [doi:10.1126/science.aar4362](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362)
