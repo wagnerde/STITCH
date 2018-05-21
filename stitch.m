@@ -19,9 +19,14 @@ function G = stitch(DataSet, varargin)
 %           DataSet.gene_ind    is an array of gene row indices, e.g. 
 %                               highly-variable genes. (optional)
 %           DataSet.batch_flag  is a numeric index of individual sample 
-%                               batches within a timepoint. 
-%                               if present, gene normalizations are 
-%                               performed within each batch. (optional)
+%                               batches within a timepoint. if present, 
+%                               gene normalizations are performed within 
+%                               each batch. (optional)
+%           DataSet.nDim        indicates the number of PCA dimensions to 
+%                               to use for each timepoint (optional).
+%                               If not provided, a single value ('nDIM')
+%                               will be used for all timepoints.
+%                               
 %                               
 % Optional input name/value pairs: 
 % 'k_initial'

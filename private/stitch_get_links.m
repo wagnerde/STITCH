@@ -23,8 +23,13 @@ function stitch_links = stitch_get_links(DataSet_basis, DataSet_link, settings)
 
 %% CODE:
 if DataSet_basis.ind == DataSet_link.ind
-    disp('Error! To map within a single timepoint, use "knnit_get_knn" instead')
+    disp('Error! To map within a single timepoint, use "stitch_get_knn" instead')
     return
+end
+
+% if provided, import timepoint-specific nDim setting
+if isfield(DataSet_basis,'nDim')
+    settings.nDim = DataSet_basis.nDim;
 end
 
 % determine whether the basis dataset occurs earlier or later in time

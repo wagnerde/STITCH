@@ -16,6 +16,11 @@ function stitch_knn = stitch_get_knn(DataSet, settings)
 
 %% CODE:
 
+% if provided, import timepoint-specific nDim setting
+if isfield(DataSet,'nDim')
+    settings.nDim = DataSet.nDim;
+end
+
 % subset data by highly variable genes
 nGenes = length(DataSet.gene_ind);
 X_indexed = DataSet.X_norm(DataSet.gene_ind,:);
