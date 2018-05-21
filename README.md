@@ -24,6 +24,7 @@ Input data are supplied to STITCH as a Matlab object called "DataSet".  "DataSet
 3. **DataSet.ind**.  A numeric index for each timepoint (REQUIRED).
 4. **DataSet.gene_ind**.  An array of gene row indices, e.g. highly variable genes (OPTIONAL). If not provided, variable genes will be determined automatically using an above-Poisson noise statistic as reported in [Klein et. al. 2015](https://doi.org/10.1016/j.cell.2015.04.044).
 5. **DataSet.batch_flag**. A numeric array of sample batch IDs for each cell within each timepoint (OPTIONAL). If present, gene normalizations are performed within each batch.
+6. **DataSet.nDim**. Number of PCA dimensions to use for each timepoint (OPTIONAL). If not provided, a single value ('nDim') will be used for all timepoints.
 
 An example DataSet from [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362) can be downloaded [here](https://kleintools.hms.harvard.edu/paper_websites/wagner_zebrafish_timecourse2018/WagnerScience2018.mat).
 
@@ -102,12 +103,16 @@ STITCH:
  'graph_max_D_global':
            Global distance threshold for filtering graph edges. Expressed 
            as a z-score over all edges in the current timepoint 
-           (default=0).
+           (default=-1).
            
  'link_max_D_global':
            Global distance threshold for filtering link edges. Expressed 
            as a z-score over all edges in the current timepoint 
-           (default=0).
+           (default=0).           
+           
+ 'require_mutual_edges'
+           Only retain edges for which both nodes appear in the other 
+           node's outgoing edge list (default=true).
 ```
 
 
