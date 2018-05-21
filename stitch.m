@@ -52,12 +52,16 @@ function G = stitch(DataSet, varargin)
 % 'graph_max_D_global':
 %           Global distance threshold for filtering graph edges. Expressed 
 %           as a z-score over all edges in the current timepoint 
-%           (default=0).
+%           (default=-1).
 %           
 % 'link_max_D_global':
 %           Global distance threshold for filtering link edges. Expressed 
 %           as a z-score over all edges in the current timepoint 
 %           (default=0).
+%
+% 'require_mutual_edges'
+%           Retain only mutual edges in which both nodes appear in the 
+%           other's outgoing edge list (default=true).
 %
 % OUTPUTS:
 % G         Matlab graph object containing node and edge tables
@@ -74,6 +78,7 @@ def.graph_max_D_local = 3;
 def.link_max_D_local =  3; 
 def.graph_max_D_global = -1;
 def.link_max_D_global = 0; 
+def.require_mutual_edges = true;
 
 % Create parser object
 parserObj = inputParser;
@@ -87,6 +92,7 @@ parserObj.addOptional('graph_max_D_local',def.graph_max_D_local);
 parserObj.addOptional('link_max_D_local',def.link_max_D_local);
 parserObj.addOptional('graph_max_D_global',def.graph_max_D_global);
 parserObj.addOptional('link_max_D_global',def.link_max_D_global);
+parserObj.addOptional('require_mutual_edges',def.require_mutual_edges);
 
 % Parse input options
 parserObj.parse(varargin{:});

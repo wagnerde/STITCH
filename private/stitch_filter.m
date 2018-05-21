@@ -33,10 +33,12 @@ disp(['# nodes after distance filters: ', num2str(height(NodeTable))]);
 disp(['# edges after distance filters: ', num2str(round(height(EdgeTable)/1000)), 'K']);
 
 % (2) retain only the basis-outgoing edges that had a mutual incoming edge
-EdgeTable = stitch_filter_nonmutual_edges(EdgeTable);
-EdgeTable(EdgeTable.BasisOutgoing == 0,:) = [];
-disp(['# nodes after mutual edge filter: ', num2str(height(NodeTable))]);
-disp(['# edges after mutual edge filter: ', num2str(round(height(EdgeTable)/1000)), 'K']);
+if settings.require_mutual_edges
+    EdgeTable = stitch_filter_nonmutual_edges(EdgeTable);
+    EdgeTable(EdgeTable.BasisOutgoing == 0,:) = [];
+    disp(['# nodes after mutual edge filter: ', num2str(height(NodeTable))]);
+    disp(['# edges after mutual edge filter: ', num2str(round(height(EdgeTable)/1000)), 'K']);
+end
 
 % (3) restrict graph to k_final outgoing edges per node
 % For each node, consider all graph and link edges built in that node's 
