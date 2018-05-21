@@ -65,8 +65,8 @@ function G = stitch(DataSet, varargin)
 %           (default=0).
 %
 % 'require_mutual_edges'
-%           Retain only mutual edges in which both nodes appear in the 
-%           other's outgoing edge list (default=true).
+%           Only retain edges for which both nodes appear in the other 
+%           node's outgoing edge list (default=true).
 %
 % OUTPUTS:
 % G         Matlab graph object containing node and edge tables
