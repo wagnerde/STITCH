@@ -38,6 +38,11 @@ if settings.require_mutual_edges
     EdgeTable(EdgeTable.BasisOutgoing == 0,:) = [];
     disp(['# nodes after mutual edge filter: ', num2str(height(NodeTable))]);
     disp(['# edges after mutual edge filter: ', num2str(round(height(EdgeTable)/1000)), 'K']);
+else
+    disp('Considering all outgoing edges')
+    EdgeTable(EdgeTable.BasisOutgoing == 0,:) = [];
+    disp(['# nodes remaining: ', num2str(height(NodeTable))]);
+    disp(['# edges remaining: ', num2str(round(height(EdgeTable)/1000)), 'K']);
 end
 
 % (3) restrict graph to k_final outgoing edges per node
