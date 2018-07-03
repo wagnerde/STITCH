@@ -202,5 +202,5 @@ xlabel('Mean Reads per Cell')
 ylabel('Gene Fano Factor')
 set(gca,'xlim',[min(mu_gene)*0.2 max(mu_gene)*5],'xtick',10.^(-5:5))
 set(gca,'ylim',[min(FF_gene)*0.2 max(FF_gene)*5],'ytick',10.^(-5:5))
-title(['Gene v-scores: ' DataSet.name])
+title(['Gene : ' DataSet.name])
 

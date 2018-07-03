@@ -14,7 +14,9 @@ function DataSet = stitch_preprocess(DataSet, varargin)
 %           DataSet.X           is a single-cell counts matrix; (required)   
 %                               rows=transcripts, columns=cells.  
 %           DataSet.gene_ind    is an array of gene row indices, e.g. 
-%                               highly-variable genes. (optional)
+%                               highly-variable genes. (optional). if
+%                               provided, automated detection of highly
+%                               variable genes will be skipped.
 %           DataSet.batch_flag  is a numeric index of individual sample 
 %                               batches within a timepoint. 
 %                               if present, gene normalizations are 
@@ -25,6 +27,19 @@ function DataSet = stitch_preprocess(DataSet, varargin)
 %           Initial number of top variable genes to consider (default=2000)
 %           Can alternatively be expressed as a fraction 
 %           (e.g., 0.05 = top 5% most variable genes)
+%
+% 'CV_eff'
+%           Optional legacy parameter for calculating gene v-scores.  
+%           CV_eff is the noise in the efficiency of transcript capture 
+%           between single cells. If left, blank, this parameter will be 
+%           estimated automatically from the data (default=[])  
+%
+% 'CV_input'
+%           Optional legacy parameter for calculating gene v-scores.  
+%           CV_input is the variation in total number of poly-A target mRNA 
+%           molecules per cell in the sample. If left, blank, this 
+%           parameter will be estimated automatically from the data 
+%           (default=[])  
 %
 % 'minCounts'
 %           Filter variable genes based on minimum number of counts
@@ -61,6 +76,8 @@ function DataSet = stitch_preprocess(DataSet, varargin)
 %% PARAMETER SETTINGS
 % Set defaults
 def.topVarGenes = 2000;
+def.CV_eff = [];
+def.CV_input = [];
 def.minCounts = 3;
 def.minCells = 1;
 def.minGeneCorr = 0.2;
@@ -75,6 +92,8 @@ parserObj = inputParser;
 parserObj.FunctionName = 'stitch';
 parserObj.StructExpand = false; 
 parserObj.addOptional('topVarGenes',def.topVarGenes);
+parserObj.addOptional('CV_eff',def.CV_eff);
+parserObj.addOptional('CV_input',def.CV_input);
 parserObj.addOptional('minCounts',def.minCounts);
 parserObj.addOptional('minCells',def.minCells);
 parserObj.addOptional('minGeneCorr',def.minGeneCorr);
