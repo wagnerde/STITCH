@@ -72,7 +72,7 @@ function var_gene_ind = get_variable_genes(DataSet, varargin)
 %           
 % 'excludeGeneCorr'
 %           Expand the excluded gene list to include correlated genes based
-%           on this threshold (default=0.2)
+%           on this threshold (default=0.4)
 %
 % 'excludeIter'
 %           Number of iterations for adding correlated genes to 
@@ -146,7 +146,7 @@ ind_not_nan = find(~isnan(vscores_sorted), 1, 'first');
 var_gene_ind = vscores_rank(ind_not_nan:end); 
 
 % apply counts filter
-counts_flag = sum(X_norm > settings.minCounts, 2) >= settings.minCells;
+counts_flag = sum(X_norm >= settings.minCounts, 2) >= settings.minCells;
 var_gene_ind = setdiff(var_gene_ind, find(~counts_flag), 'stable');
     
 % apply topVarGenes filter 
