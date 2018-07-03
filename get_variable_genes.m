@@ -123,8 +123,7 @@ settings = parserObj.Results;
 %% CODE:
 % if batch_flag is present, use just the first batch to find variable genes
 if isfield(DataSet,'batch_flag')
-    X_norm = DataSet.X_norm(:,DataSet.batch_flag==1);
-    tot_counts = DataSet.tot_counts(DataSet.batch_flag==1);
+    [X_norm, tot_counts] = get_normalized_counts(DataSet.X(:,DataSet.batch_flag==1));
 else
     X_norm = DataSet.X_norm;
     tot_counts = DataSet.tot_counts;
