@@ -135,7 +135,15 @@ Parameter settings for get_variable_genes and get_stitch_graph functions can be 
 
 The main STITCH functions are called in Matlab.
 
-1. First preprocess the data to perform total counts normalization and (if necessary) identify highly variable genes for each timepoint.  The output is an updated version of the DataSet object.  
+1. First preprocess the data to perform total counts normalization and (if necessary) identify highly variable genes for each timepoint.  The output is an updated version of the DataSet object. 
+  ```
+  for j = 1:length(DataSet)
+      [DataSet(j).X_norm, DataSet(j).tot_counts] = get_normalized_counts(DataSet(j).X);
+      DataSet(j).gene_ind = get_variable_genes(DataSet(j));
+  end
+  ```
+
+
   ```DataSet = stitch_preprocess(DataSet)```
 
 2. Run the main STITCH pipeline.  This generates a Matlab graph object.  
