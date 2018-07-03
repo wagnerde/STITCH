@@ -18,11 +18,11 @@ STITCH was developed and used to analyze zebrafish embryonic development in:
 ## Usage ##
 
 ### Inputs ###
-Input data are supplied to STITCH as a Matlab object called "DataSet".  "DataSet" is a structure array the following fields and one record for each timepoint:
-1. **DataSet.X**. A UMI-filtered counts matrix; rows=transcripts, columns=cells (REQUIRED).  X can be supplied as a sparse matrix. 
-2. **DataSet.name**. A unique string identifier for each timepoint (REQUIRED).
-3. **DataSet.ind**.  A numeric index for each timepoint (REQUIRED).
-4. **DataSet.gene_ind**.  An array of gene row indices, e.g. highly variable genes (OPTIONAL). If not provided, variable genes will be determined automatically using an above-Poisson noise statistic as reported in [Klein et. al. 2015](https://doi.org/10.1016/j.cell.2015.04.044).
+Input data are supplied to STITCH as a Matlab object called "DataSet".  "DataSet" is a structure array with the following fields and one record for each timepoint sample:
+1. **DataSet.name**. A unique string identifier for each sample timepoint (REQUIRED).
+2. **DataSet.ind**.  A numeric index indicating timeseries order (REQUIRED).
+3. **DataSet.X**.  A UMI-filtered counts matrix; rows=transcripts, columns=cells (REQUIRED).  X can be supplied as a sparse matrix.  
+4. **DataSet.gene_ind**.  An array of gene row indices, e.g. highly variable genes (OPTIONAL). If not provided, variable genes will be determined  using a corrected Fano factor test statistic as reported in [Klein et. al. 2015](https://doi.org/10.1016/j.cell.2015.04.044).
 5. **DataSet.batch_flag**. A numeric array of sample batch IDs for each cell within each timepoint (OPTIONAL). If present, gene normalizations are performed within each batch.
 6. **DataSet.nDim**. Number of PCA dimensions to use for each timepoint (OPTIONAL). If not provided, a single value ('nDim') will be used for all timepoints.
 
@@ -30,15 +30,30 @@ An example DataSet from [Wagner et. al. 2018](http://science.sciencemag.org/cont
 
 
 ### Settings ###
-Parameter settings for both the pre-processing and main STITCH functions can be specified using optional name/value pairs.  Defaults implement the original settings used in [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362).
+Parameter settings for get_variable_genes and get_stitch_graph functions can be specified using optional name/value pairs.  Defaults implement the original settings used in [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362).
 
-Preprocess Data:  
+**get_variable_genes**
 
 ```
-'topVarGenes'
+ 'topVarGenes'
            Initial number of top variable genes to consider (default=2000)
            Can alternatively be expressed as a fraction 
-           (e.g., 0.05 = top 5% most variable genes)
+           (e.g. 0.50 = top 50% most variable genes)
+
+ 'CV_eff'
+           Optional parameter for identifying highly variable genes, passed
+           to the get_vscores_legacy function.
+           CV_eff is the noise in the efficiency of transcript capture 
+           between single cells. If left, blank, this parameter will be 
+           estimated automatically from the data (default=[])  
+
+ 'CV_input'
+           Optional parameter for identifying highly variable genes, passed
+           to the get_vscores_legacy function.
+           CV_input is the variation in total number of poly-A target mRNA 
+           molecules per cell in the sample. If left, blank, this 
+           parameter will be estimated automatically from the data 
+           (default=[])  
 
  'minCounts'
            Filter variable genes based on minimum number of counts
@@ -67,12 +82,12 @@ Preprocess Data:
            Number of iterations for adding correlated genes to 
            excludeGeneList (default=2)
 
- 'plot_var_genes'
+ 'show_plot'
            Display plot of gene Fano Factor vs Mean with selected genes
            highlighted (default=false)
 ```
 
-STITCH:  
+**get_stitch_graph**
 
 ```
  'k_initial'
