@@ -76,12 +76,12 @@ Parameter settings for data preprocessing (see "scTools") and the main STITCH pi
 
 ### Run STITCH ###
 
-We provide a script: "stitch_Wagner2018.m" for running the entire pipeline, starting with raw UMI counts tables.  The script begins by downloading counts data, performing total counts normalization, identifying variable genes, calculating and plotting a STITCH graph.
+We provide a script: "stitch_Wagner2018.m" for running the entire pipeline.  The script begins by downloading data, performing total counts normalization, identifying variable genes, calculating and plotting a STITCH graph.
 
 Run the script by typing the following into the Matlab command line:     
-  ```run('stitch_Wagner2018.m')```;
+  ```run('stitch_Wagner2018.m')```
 
-We recommend visualizing STITCH graphs using the ForceAtlas2 layout in [Gephi](https://gephi.org/). The Matlab graph object can be imported into Gephi from DOT format, for example by using the 'graph_to_dot' function from [Matlab-Graphviz interface](https://www.mathworks.com/matlabcentral/fileexchange/4518-matlab-graphviz-interface) by Leon Peshkin.  
+We recommend visualizing STITCH graphs interactively using the ForceAtlas2 layout in [Gephi](https://gephi.org/). The Matlab graph object can be imported into Gephi from DOT format, for example by using the 'graph_to_dot' function from [Matlab-Graphviz interface](https://www.mathworks.com/matlabcentral/fileexchange/4518-matlab-graphviz-interface) by Leon Peshkin.  
   ```graph_to_dot(adjacency(G), 'directed', 0, 'filename', 'gephi_graph.dot')```
 
 Gephi coordinates can be exported as a .NET file and imported back to Matlab.  The example dataset provides pre-computed XY coordinates.  
