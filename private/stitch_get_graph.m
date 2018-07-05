@@ -1,5 +1,5 @@
-function G = stitch(DataSet, varargin)
-% Usage: G = stitch(DataSet, varargin)
+function G = stitch_get_graph(DataSet, varargin)
+% Usage: G = stitch_get_graph(DataSet, varargin)
 %
 % Main function for the STITCH pipeline.  Inputs a DataSet object and 
 % performs the following steps:

@@ -30,64 +30,7 @@ An example DataSet from [Wagner et. al. 2018](http://science.sciencemag.org/cont
 
 
 ### Settings ###
-Parameter settings for get_variable_genes and get_stitch_graph functions can be specified using optional name/value pairs.  Defaults implement the original settings used in [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362).
-
-**get_variable_genes**
-
-```
- 'topVarGenes'
-           Initial number of top variable genes to consider (default=2000)
-           Can alternatively be expressed as a fraction 
-           (e.g. 0.50 = top 50% most variable genes)
-
- 'CV_eff'
-           Optional parameter for identifying highly variable genes, passed
-           to the get_vscores_legacy function.
-           CV_eff is the noise in the efficiency of transcript capture 
-           between single cells. If left, blank, this parameter will be 
-           estimated automatically from the data (default=[])  
-
- 'CV_input'
-           Optional parameter for identifying highly variable genes, passed
-           to the get_vscores_legacy function.
-           CV_input is the variation in total number of poly-A target mRNA 
-           molecules per cell in the sample. If left, blank, this 
-           parameter will be estimated automatically from the data 
-           (default=[])  
-
- 'minCounts'
-           Filter variable genes based on minimum number of counts
-           (default=3)
-
- 'minCells'
-           Minimum number of cells that must exceed minCounts (default=1)
-
- 'minGeneCorr'
-           Filter variable genes based on minimum expression correlation
-           to other genes (default=0.2)
-
- 'excludeGeneNames'
-           Cell array of strings of gene names to exclude from the 
-           variable gene list, e.g. cell cycle markers (default={}).
-
- 'allGeneNames'
-           Cell array of strings of all gene names. Only required if 
-           'excludeGeneNames' is invoked (default={}).
-           
- 'excludeGeneCorr'
-           Expand the excluded gene list to include correlated genes based
-           on this threshold (default=0.2)
-
- 'excludeIter'
-           Number of iterations for adding correlated genes to 
-           excludeGeneList (default=2)
-
- 'show_plot'
-           Display plot of gene Fano Factor vs Mean with selected genes
-           highlighted (default=false)
-```
-
-**get_stitch_graph**
+Parameter settings for data preprocessing and the main STITCH pipeline are specified using optional name/value pairs.  Default behavior implements settings used in [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362).
 
 ```
  'k_initial'
@@ -135,15 +78,7 @@ Parameter settings for get_variable_genes and get_stitch_graph functions can be 
 
 The main STITCH functions are called in Matlab.
 
-1. First preprocess the data to perform total counts normalization and (if necessary) identify highly variable genes for each timepoint.  The output is an updated version of the DataSet object. 
-  ```
-  for j = 1:length(DataSet)
-      [DataSet(j).X_norm, DataSet(j).tot_counts] = get_normalized_counts(DataSet(j).X);
-      DataSet(j).gene_ind = get_variable_genes(DataSet(j));
-  end
-  ```
-
-
+1. First preprocess the data to perform total counts normalization and identify highly variable genes for each timepoint.  The output is an updated version of the DataSet object. 
   ```DataSet = stitch_preprocess(DataSet)```
 
 2. Run the main STITCH pipeline.  This generates a Matlab graph object.  
