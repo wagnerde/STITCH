@@ -22,7 +22,7 @@ Input data are supplied to STITCH as a Matlab object called "DataSet".  "DataSet
 1. **DataSet.name**. A unique string identifier for each sample timepoint (REQUIRED).
 2. **DataSet.ind**.  A numeric index indicating timeseries order (REQUIRED).
 3. **DataSet.X**.  A UMI-filtered counts matrix; rows=transcripts, columns=cells (REQUIRED).  X can be supplied as a sparse matrix.  
-4. **DataSet.gene_ind**.  An array of gene row indices, e.g. highly variable genes (OPTIONAL). If not provided, variable genes will be determined  using a corrected Fano factor test statistic as reported in [Klein et. al. 2015](https://doi.org/10.1016/j.cell.2015.04.044).
+4. **DataSet.gene_ind**.  An array of gene row indices, e.g. highly variable genes (OPTIONAL). If not provided, variable genes can be determined  using a corrected Fano factor test statistic as reported in [Klein et. al. 2015](https://doi.org/10.1016/j.cell.2015.04.044).
 5. **DataSet.batch_flag**. A numeric array of sample batch IDs for each cell within each timepoint (OPTIONAL). If present, gene normalizations are performed within each batch.
 6. **DataSet.nDim**. Number of PCA dimensions to use for each timepoint (OPTIONAL). If not provided, a single value ('nDim') will be used for all timepoints.
 

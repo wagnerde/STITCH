@@ -107,7 +107,7 @@ settings = parserObj.Results;
 
 % Check whether preprocessing is still needed
 if (~isfield(DataSet, 'X_norm') || ~isfield(DataSet, 'tot_counts') || ~isfield(DataSet, 'gene_ind'))
-    disp('Missing Fields.  Please run stitch_preprocess first')
+    disp('Missing Fields.  Please run "get_normalized_counts" and "get_variable_genes" before calculating a STITCH graph.')
     return
 end
 

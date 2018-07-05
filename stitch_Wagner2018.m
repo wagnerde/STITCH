@@ -14,6 +14,7 @@ if ~(exist('WagnerScience2018.mat', 'file') == 2)
 end
 
 % (2) Load mat file
+disp('Opening mat file...')
 load('WagnerScience2018.mat')
 
 % (3) Add scTools functions to Matlab path
@@ -28,8 +29,7 @@ end
 disp('Done normalizing')
 
 % (5) Identify variable genes
-% Define settings for the "get_variable_genes" function to reproduce the
-% STITCH graph from Wagner 2018.  
+% Define settings used in Wagner et al. 2018.  
 disp('Getting variable genes...')
 CV_eff =   [0.60 0.40 0.40 0.40 0.40 0.40 0.40];
 CV_input = [0.20 0.15 0.15 0.20 0.22 0.22 0.22];
@@ -42,13 +42,13 @@ exclude_genes = {'cdk1','mcm2', 'mcm7', 'rrm2', 'cenpa', 'cdc6', 'ccnf', 'cdca4'
 for j = 1:nTimePoints
     DataSet(j).gene_ind = get_variable_genes(DataSet(j), 'CV_eff', CV_eff(j) , 'CV_input', CV_input(j), 'excludeGeneNames', exclude_genes, 'allGeneNames', gene_names_all);
 end
-disp('Done calculating variable genes.')
+disp('Done identifying variable genes.')
 
 % (6) Calculate the STITCH graph
 disp('Calculating STITCH graph...')
 G = stitch_get_graph(DataSet);
 
-% (7) Plot the STITCH graph
+% (7) Plot the STITCH graph using precomputed XY coordinates
 stitch_plot_graph(G, XY)
 
 
