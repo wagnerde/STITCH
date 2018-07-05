@@ -30,7 +30,7 @@ An example DataSet from [Wagner et. al. 2018](http://science.sciencemag.org/cont
 
 
 ### Settings ###
-Parameter settings for data preprocessing and the main STITCH pipeline are specified using optional name/value pairs.  Default behavior implements settings used in [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362).
+Parameter settings for data preprocessing (see "scTools") and the main STITCH pipeline (see "stitch_get_graph") are specified using optional name/value pairs.  Default behavior implements settings used in [Wagner et. al. 2018](http://science.sciencemag.org/content/early/2018/04/25/science.aar4362).
 
 ```
  'k_initial'
@@ -76,21 +76,18 @@ Parameter settings for data preprocessing and the main STITCH pipeline are speci
 
 ### Run STITCH ###
 
-The main STITCH functions are called in Matlab.
+We provide a script: "stitch_Wagner2018.m" for running the entire pipeline, starting with raw UMI counts tables.  The script begins by downloading counts data, performing total counts normalization, identifying variable genes, calculating and plotting a STITCH graph.
 
-1. First preprocess the data to perform total counts normalization and identify highly variable genes for each timepoint.  The output is an updated version of the DataSet object. 
-  ```DataSet = stitch_preprocess(DataSet)```
+Run the script by typing the following into the Matlab command line:
+  ```run('stitch_Wagner2018.m')```;
 
-2. Run the main STITCH pipeline.  This generates a Matlab graph object.  
-  ```G = stitch(DataSet)```
-
-3. We recommend visualizing STITCH graphs using the ForceAtlas2 layout in [Gephi](https://gephi.org/). The Matlab graph object can be imported into Gephi from DOT format, for example by using the 'graph_to_dot' function from [Matlab-Graphviz interface](https://www.mathworks.com/matlabcentral/fileexchange/4518-matlab-graphviz-interface) by Leon Peshkin.  
+We recommend visualizing STITCH graphs using the ForceAtlas2 layout in [Gephi](https://gephi.org/). The Matlab graph object can be imported into Gephi from DOT format, for example by using the 'graph_to_dot' function from [Matlab-Graphviz interface](https://www.mathworks.com/matlabcentral/fileexchange/4518-matlab-graphviz-interface) by Leon Peshkin.  
   ```graph_to_dot(adjacency(G), 'directed', 0, 'filename', 'gephi_graph.dot')```
 
-4. Gephi coordinates can be exported as a .NET file and imported back to Matlab.  The example dataset provides pre-computed XY coordinates.  
+Gephi coordinates can be exported as a .NET file and imported back to Matlab.  The example dataset provides pre-computed XY coordinates.  
   ```XY = stitch_import_gephi('gephi_export.net')```
 
-5. Plot the STITCH graph using Gephi coordinates.    
+Plot the STITCH graph using Gephi coordinates.    
   ```stitch_plot_graph(G, XY)```
 
 
