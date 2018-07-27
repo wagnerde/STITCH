@@ -1,5 +1,5 @@
-function EdgeTable = graph_filter_duplicate_edges(EdgeTable)
-% Usage: EdgeTable = graph_filter_duplicate_edges(EdgeTable)
+function EdgeTable = filter_graph_duplicate_edges(EdgeTable)
+% Usage: EdgeTable = filter_graph_duplicate_edges(EdgeTable)
 %
 % Accepts a table of STITCH edges. 
 % Identifies and removes any duplicate edges.

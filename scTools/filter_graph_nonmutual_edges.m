@@ -1,5 +1,5 @@
-function EdgeTable = graph_filter_nonmutual_edges(EdgeTable)
-% Usage: EdgeTable = graph_filter_nonmutual_edges(EdgeTable)
+function EdgeTable = filter_graph_nonmutual_edges(EdgeTable)
+% Usage: EdgeTable = filter_graph_nonmutual_edges(EdgeTable)
 %
 % Accepts a table of STITCH edges. 
 % Identifies non-duplicate (non-mutual) edges and discards them.
