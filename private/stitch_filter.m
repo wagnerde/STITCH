@@ -34,7 +34,7 @@ disp(['# edges after distance filters: ', num2str(round(height(EdgeTable)/1000))
 
 % (2) retain only the basis-outgoing edges that had a mutual incoming edge
 if settings.require_mutual_edges
-    EdgeTable = graph_filter_nonmutual_edges(EdgeTable);
+    EdgeTable = filter_nonmutual_edges(EdgeTable);
     EdgeTable(EdgeTable.BasisOutgoing == 0,:) = [];
     disp(['# nodes after mutual edge filter: ', num2str(height(NodeTable))]);
     disp(['# edges after mutual edge filter: ', num2str(round(height(EdgeTable)/1000)), 'K']);
@@ -67,13 +67,13 @@ for k = 1:settings.k_final
 end
 UniqueEdgeID_to_keep_original_ind = ismember(EdgeTable.UniqueEdgeID, UniqueEdgeID_to_keep);
 EdgeTable = EdgeTable(UniqueEdgeID_to_keep_original_ind,:);
-EdgeTable = graph_filter_duplicate_edges(EdgeTable);    
+EdgeTable = filter_duplicate_edges(EdgeTable);    
 disp(['# nodes after k_final filter: ', num2str(height(NodeTable))]);
 disp(['# edges after k_final filter: ', num2str(round(height(EdgeTable)/1000)), 'K']);
 
 % (4) isolate the 'giant' component (connected component #1)
 G = graph(EdgeTable, NodeTable); 
-G = graph_filter_giant_component(G);
+G = filter_graph_giant_component(G);
 disp(['# nodes in giant: ', num2str(numnodes(G))]);
 disp(['# edges in giant: ', num2str(round(numedges(G)/1000)), 'K']);
 
