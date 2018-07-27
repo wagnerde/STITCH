@@ -1,5 +1,5 @@
-function [G_giant, G_others] = graph_filter_giant_component(G)
-% Usage: [G_giant, G_others] = graph_filter_giant_component(G)
+function [G_giant, G_others] = filter_graph_giant_component(G)
+% Usage: [G_giant, G_others] = filter_graph_giant_component(G)
 %
 % Identifies and returns the largest connected component in a graph. 
 % Inputs and Outputs are all Matlab graph objects.
