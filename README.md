@@ -82,10 +82,13 @@ Run the script by typing the following into the Matlab command line:
   ```run('script_runSTITCH_Wagner2018.m')```
 
 We recommend visualizing STITCH graphs interactively using the ForceAtlas2 layout in [Gephi](https://gephi.org/). The Matlab graph object can be imported into Gephi from DOT format, for example by using the 'graph_to_dot' function from [Matlab-Graphviz interface](https://www.mathworks.com/matlabcentral/fileexchange/4518-matlab-graphviz-interface) by Leon Peshkin.  
-  ```graph_to_dot(adjacency(G), 'directed', 0, 'filename', 'gephi_graph.dot')```
+  ```
+  addpath('scTools/graphViz2Mat1')
+  graph_to_dot(adjacency(G), 'directed', 0, 'filename', 'gephi_graph.dot')
+  ```
 
 Gephi coordinates can be exported as a .NET file and imported back to Matlab.  The example dataset provides pre-computed XY coordinates.  
-  ```XY = stitch_import_gephi('gephi_export.net')```
+  ```XY = import_gephi_xy('gephi_export.net')```
 
 Plot the STITCH graph using Gephi coordinates.    
   ```stitch_plot_graph(G, XY)```
