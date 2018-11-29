@@ -132,7 +132,7 @@ OPTIONAL INPUTS:
  'nodes_custom' 
                 An array of custom node values, which must match the 
                 number of nodes in the graph.  If specified, this option 
-                overrides 'nodes' option.
+                overrides the 'nodes' option.
 
  'node_color_scale'
                 Input string: 'log' (default) or 'linear'.
@@ -156,7 +156,7 @@ OPTIONAL INPUTS:
  'edges_custom'
                 An array of custom edge values, which must match the 
                 number of edges in the graph.  If specified, this option 
-                overrides 'edges'.
+                overrides the 'edges' option.
 
  'edge_color_scale'
                 Input string: 'log' or 'linear' (default).
