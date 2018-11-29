@@ -83,6 +83,8 @@ Run the script by typing the following into the Matlab command line:
   run('script_runSTITCH_Wagner2018.m')
   ```
 
+### Visualizing STITCH Graphs ###
+
 We recommend visualizing STITCH graphs interactively using the ForceAtlas2 layout in [Gephi](https://gephi.org/). The Matlab graph object can be imported into Gephi from DOT format, for example by using the 'graph_to_dot' function from [Matlab-Graphviz interface](https://www.mathworks.com/matlabcentral/fileexchange/4518-matlab-graphviz-interface) by Leon Peshkin.  
   ```
   addpath('scTools/graphViz2Mat1')
@@ -94,13 +96,18 @@ Gephi coordinates can be exported as a .NET file and imported back to Matlab.  T
   XY = import_gephi_xy('gephi_export.net')
   ```
 
-Plot the STITCH graph using Gephi coordinates.    
+Plot the STITCH graph using Gephi coordinates. Default behavior colors nodes by timepoint.    
   ```
   stitch_plot_graph(G, XY)
   ```
 
-
-
+Alternatively, color nodes by a specific gene.  For a full list of formatting options, consult 'stitch_plot_graph.m' documentation.
+```
+  stitch_plot_graph(G, XY, DataSet, gene_names_all, 'nodes', 'nanog')
+  stitch_plot_graph(G, XY, DataSet, gene_names_all, 'nodes', 'epcam')
+  stitch_plot_graph(G, XY, DataSet, gene_names_all, 'nodes', 'msgn1')
+  stitch_plot_graph(G, XY, DataSet, gene_names_all, 'nodes', 'sox19a')
+```
 
 
 
