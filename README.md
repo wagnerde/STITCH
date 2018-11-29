@@ -101,15 +101,66 @@ Plot the STITCH graph using Gephi coordinates. Default behavior colors nodes by 
   stitch_plot_graph(G, XY)
   ```
 
-Alternatively, color nodes by a specific gene.  For a full list of formatting options, consult 'stitch_plot_graph.m' documentation.
+Alternatively, color nodes by a specific gene.  
 ```
   stitch_plot_graph(G, XY, DataSet, gene_names_all, 'nodes', 'nanog')
   stitch_plot_graph(G, XY, DataSet, gene_names_all, 'nodes', 'epcam')
   stitch_plot_graph(G, XY, DataSet, gene_names_all, 'nodes', 'msgn1')
   stitch_plot_graph(G, XY, DataSet, gene_names_all, 'nodes', 'sox19a')
 ```
+See below for a full list of stitch_plot_graph input options.
+```
+INPUTS:
+ G               A STITCH graph object
+ XY              Matrix of XY coordinates for each node in G 
+ DataSet         A STITCH dataset object (only required if plotting gene
+                 expression values).
+ gene_names_all  Gene names: a cell array of strings (only required if 
+                 plotting gene expression values). 
 
+OPTIONAL INPUTS:
+ 'nodes'
+                Input string, specifying node format style.  
+                 'timepoint': colors nodes by sample/timepoint (default).
+                 'black'|'none': nodes colored black or hidden from view.
+                 'degree'|'closeness'|'eigenvector'|
+                 'betweenness'|'pagerank': nodes colored based on graph 
+                  centrality scores.
+                Any other input will be interpreted as a gene name and
+                  searched against gene_names_all.                 
 
+ 'nodes_custom' 
+                An array of custom node values, which must match the 
+                number of nodes in the graph.  If specified, this option 
+                overrides 'nodes' option.
+
+ 'node_color_scale'
+                Input string: 'log' (default) or 'linear'.
+
+ 'node_size'
+                Float specifying node marker size (default = 0.8) 
+
+ 'hide_zero_count_nodes'
+                When plotting gene expression or custom values, option 
+                to hide all nodes with zero counts (default = true).
+
+ 'edges'
+                Input string, specifying edge format style. 
+                 'alpha': thin, semi-transparent edges (default).
+                 'black'|'none': edges colored black or hidden from view.
+                 'internal'|'bridges': highlight edges that connect nodes
+                  within timepoints, or bridging between timepoints.
+                 'weights': color edges based on weight (e.g. correlation
+                  distance in PCA space).
+
+ 'edges_custom'
+                An array of custom edge values, which must match the 
+                number of edges in the graph.  If specified, this option 
+                overrides 'edges'.
+
+ 'edge_color_scale'
+                Input string: 'log' or 'linear' (default).
+```
 
 
 
