@@ -113,10 +113,10 @@ See below for a full list of stitch_plot_graph input options.
 INPUTS:
  G               A STITCH graph object
  XY              Matrix of XY coordinates for each node in G 
- DataSet         A STITCH dataset object (only required if plotting gene
-                 expression values).
- gene_names_all  Gene names: a cell array of strings (only required if 
-                 plotting gene expression values). 
+ DataSet         A STITCH dataset object 
+                 (only required if plotting gene expression values)
+ gene_names_all  Gene names: a cell array of strings 
+                 (only required if plotting gene expression values)
 
 OPTIONAL INPUTS:
  'nodes'
