@@ -16,6 +16,9 @@ function nSig_PCs = get_nSig_PCs(X, gene_ind, nRandTrials)
 % nRandTrials:      Number of randomizations to use to generate random matrix
 %                   eigenvalues
 
+%% SETTINGS:
+show_plot = false;
+
 %% PERFORM PCA ON STANDARDIZED EXPRESSION VALUES:
 z = full(zscore(X(gene_ind,:)')');
 
@@ -47,7 +50,10 @@ for q=1:nRandTrials
 end
 
 %% MAKE EIGENVALUE PLOT:
+if show_plot
+
 figure
+
 % 1. Plot true eigenvalues:
 h=bar(x,f); noLegend(h); set(h,'facecolor',0.5*[1 1 1],'edgecolor',0.5*[1 1 1])
 
@@ -69,6 +75,8 @@ legend({'Random'})
 legend('boxoff')
 subtitle({['# non-random PCs = ' num2str(sum(eigvals>max(Lplus_rnd)))]},'TopLeft',[0.02 0.01]);
 axis square
+
+end
 
 %% CALCULATE NUMBER NON-RANDOM PCs FROM >95% OF RANDOMIZATION TRIALS
 for q=1:nRandTrials

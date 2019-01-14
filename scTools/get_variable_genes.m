@@ -154,7 +154,7 @@ if settings.topVarGenes > 1 % topVarGenes is expressed as nGenes
 else % topVarGenes is expressed as a fraction
     min_vscore = prctile(vscores, 100-(100*settings.topVarGenes));
     vscore_flag = vscores > min_vscore;
-    sum(vscore_flag)
+    sum(full(vscore_flag));
     var_gene_ind = setdiff(var_gene_ind, find(~vscore_flag));
 end
 
@@ -201,5 +201,5 @@ xlabel('Mean Reads per Cell')
 ylabel('Gene Fano Factor')
 set(gca,'xlim',[min(mu_gene)*0.2 max(mu_gene)*5],'xtick',10.^(-5:5))
 set(gca,'ylim',[min(FF_gene)*0.2 max(FF_gene)*5],'ytick',10.^(-5:5))
-title(['Gene v-scores: ' DataSet.name])
+title(['Gene V-scores: ' DataSet.name], 'Interpreter', 'none')
 

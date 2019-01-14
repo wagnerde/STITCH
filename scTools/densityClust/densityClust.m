@@ -33,7 +33,7 @@ function [numClust, clustInd, centInd, haloInd] = densityClust(dist, dc, rho, is
     delta(ordRho(1)) = max(delta);
     indNearNeigh(ordRho(1)) = 0; % no point with higher density
     
-    isManualSelect = 0; % 1 denote that all the cluster centroids are selected manually, otherwise 0
+    isManualSelect = 1; % 1 denote that all the cluster centroids are selected manually, otherwise 0
     [numClust, centInd] = decisionGraph(rho, delta, isManualSelect);
     
     % after the cluster centers have been found,

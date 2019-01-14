@@ -1,7 +1,8 @@
 function gene_ind = get_correlated_genes(gene_ind, X, corr_thresh, nIter)
 % Usage: gene_ind = get_correlated_genes(gene_ind, X, corr_thresh, nIter)
 %
-% Expands a list of genes by identifying highly correlated neighbors.
+% Expands a list of genes by identifying additional genes with highly 
+% correlated single-cell expression patterns.
 % 
 % INPUTS:
 % gene_ind      Row indices of genes to seed the search

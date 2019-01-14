@@ -16,14 +16,24 @@ function [numClust, centInd] = decisionGraph(rho, delta, isManualSelect)
         
         fprintf('Manually select a proper rectangle to determine all the cluster centres (use Decision Graph)!\n');
         fprintf('The only points of relatively high *rho* and high  *delta* are the cluster centers!\n');
+        figure
         plot(rho, delta, 's', 'MarkerSize', 7, 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'b');
         title('Decision Graph', 'FontSize', 17);
         xlabel('\rho');
         ylabel('\delta');
         
-        rectangle = getrect;
-        minRho = rectangle(1);
-        minDelta = rectangle(2);
+        % original code: selection disappears
+        %position = getrect;
+        
+        % DEW code: highlight selection in red 
+        draw_rect = imrect(gca);
+        position = wait(draw_rect);
+        delete(draw_rect);
+        r = rectangle('Position', [position(1), position(2), position(3), position(4)],'Linewidth', 1);
+        set(r,'edgecolor','r')
+        
+        minRho = position(1);
+        minDelta = position(2);    
         
         for i = 1 : NE
             if (rho(i) > minRho) && (delta(i) > minDelta)

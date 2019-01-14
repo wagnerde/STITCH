@@ -34,7 +34,7 @@ function tSNE = get_simple_tSNE(X_use, gene_ind, varargin)
 %
 
 %% ADD tSNE FUNCTIONS TO PATH 
-addpath('scTools/simple_tSNE_vanderMaaten2008')
+addpath('scTools/tSNE')
 
 %% INPUTS
 % Set defaults
