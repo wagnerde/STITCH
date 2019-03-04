@@ -171,7 +171,7 @@ OPTIONAL INPUTS:
 
 Export attributes of the STITCH graph as text files (e.g. for import into non-Matlab environments).   
   ```
-  stitch_export(path, DataSet, G, XY, gene_names)
+  stitch_export('export_directory', DataSet, G, XY, gene_names)
   ```
 
 The following files will be exported:
