@@ -8,7 +8,7 @@ function stitch_export(path, DataSet, G, XY, gene_names)
 %  annot.txt        Annotation flags for each cell (DataSet.celldata)
 %  timepoints.txt   Timepoint/sample flags for each cell (DataSet.name)
 %  edges.csv        Edge table for G
-%  coordinates.txt  XY coordinates for each node of the G
+%  coordinates.txt  XY coordinates for each node of graph object G
 %
 %% SETTINGS:
 %path = 'export';
