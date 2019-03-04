@@ -49,6 +49,7 @@ disp('Calculating STITCH graph...')
 G = stitch_get_graph(DataSet);
 
 % (7) Plot the STITCH graph using precomputed XY coordinates
+XY = import_gephi_xy('gephi/Wagner2018_stitch.net');
 stitch_plot_graph(G, XY)
 
 
