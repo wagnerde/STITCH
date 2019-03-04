@@ -119,33 +119,37 @@ INPUTS:
                  (only required if plotting gene expression values)
 
 OPTIONAL INPUTS:
- 'nodes'
+'nodes'
                 Input string, specifying node format style.  
                  'timepoint': colors nodes by sample/timepoint (default).
-                 'black'|'none': nodes colored black or hidden from view.
+                 'none': nodes are hidden from view.
                  'degree'|'closeness'|'eigenvector'|
                  'betweenness'|'pagerank': nodes colored based on graph 
                   centrality scores.
-                Any other input will be interpreted as a gene name and
+                 Any other input will be interpreted as a gene name and
                   searched against gene_names_all.                 
 
- 'nodes_custom' 
-                An array of custom node values, which must match the 
-                number of nodes in the graph.  If specified, this option 
-                overrides the 'nodes' option.
+'node_rgb'       An array of RGB triplet values for coloring all nodes of 
+                 the graph (e.g. [255 255 255]).  If specified, this 
+                 option overrides the 'nodes' option.
 
- 'node_color_scale'
-                Input string: 'log' (default) or 'linear'.
+'node_scores' 
+                 An array of custom node values, which must match the 
+                 number of nodes in the graph.  If specified, this option 
+                 overrides the 'nodes' option.
 
- 'node_size'
-                Float specifying node marker size (default = 0.8) 
+'node_color_scale'
+                 Input string: 'log' (default) or 'linear'.
 
- 'hide_zero_count_nodes'
-                When plotting gene expression or custom values, option 
-                to hide all nodes with zero counts (default = true).
+'node_size'
+                 Float specifying node marker size (default = 0.8) 
 
- 'edges'
-                Input string, specifying edge format style. 
+'hide_zero_count_nodes'
+                 When plotting gene expression or custom values, option 
+                 to hide all nodes with zero counts (default = true).
+
+'edges'
+                 Input string, specifying edge format style. 
                  'alpha': thin, semi-transparent edges (default).
                  'black'|'none': edges colored black or hidden from view.
                  'internal'|'bridges': highlight edges that connect nodes
@@ -153,17 +157,32 @@ OPTIONAL INPUTS:
                  'weights': color edges based on weight (e.g. correlation
                   distance in PCA space).
 
- 'edges_custom'
-                An array of custom edge values, which must match the 
-                number of edges in the graph.  If specified, this option 
-                overrides the 'edges' option.
+'edge_scores'
+                 An array of custom edge values, which must match the 
+                 number of edges in the graph.  If specified, this option 
+                 overrides the 'edges' option.
 
- 'edge_color_scale'
-                Input string: 'log' or 'linear' (default).
+'edge_color_scale'
+                 Input string: 'log' or 'linear' (default).
+
 ```
 
+### Exporting STITCH Graphs ###
 
+Export attributes of the STITCH graph as text files (e.g. for import into non-Matlab environments).   
+  ```
+  stitch_export('export_directory', DataSet, G, XY, gene_names)
+  ```
 
+The following files will be exported:
+```
+genes.txt        Gene names
+counts.csv       Genes x cells counts matrix
+annot.txt        Annotation flags for each cell (DataSet.celldata)
+timepoints.txt   Timepoint/sample flags for each cell (DataSet.name)
+edges.csv        Edge table for G
+coordinates.txt  XY coordinates for each node of G
+```
 
 
 

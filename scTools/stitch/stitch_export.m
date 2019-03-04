@@ -2,13 +2,21 @@ function stitch_export(path, DataSet, G, XY, gene_names)
 % Usage: stitch_export(path, DataSet, G, XY, gene_names)
 %
 % Export attributes of the STITCH graph (e.g. for import into ScanPy):
+% 
+% INPUTS:
+% path              Name of directory to write files (string).
+% DataSet           STITCH Data structure 
+% G                 STITCH Graph object
+% XY                XY coordinates imported from Gephi
+% gene_names        Object containing gene names (cell array of strings)
 %
+% OUTPUT FILES:
 %  genes.txt        Gene names
 %  counts.csv       Genes x cells counts matrix
 %  annot.txt        Annotation flags for each cell (DataSet.celldata)
 %  timepoints.txt   Timepoint/sample flags for each cell (DataSet.name)
 %  edges.csv        Edge table for G
-%  coordinates.txt  XY coordinates for each node of the G
+%  coordinates.txt  XY coordinates for each node of graph object G
 %
 %% SETTINGS:
 %path = 'export';

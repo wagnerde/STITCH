@@ -17,14 +17,18 @@ function stitch_plot_graph(G, XY, DataSet, gene_names_all, varargin)
 % 'nodes'
 %                 Input string, specifying node format style.  
 %                  'timepoint': colors nodes by sample/timepoint (default).
-%                  'black'|'none': nodes colored black or hidden from view.
+%                  'none': nodes are hidden from view.
 %                  'degree'|'closeness'|'eigenvector'|
 %                  'betweenness'|'pagerank': nodes colored based on graph 
 %                   centrality scores.
 %                  Any other input will be interpreted as a gene name and
 %                   searched against gene_names_all.                 
 %
-% 'nodes_custom' 
+% 'node_rgb'       An array of RGB triplet values for coloring all nodes of 
+%                  the graph (e.g. [255 255 255]).  If specified, this 
+%                  option overrides the 'nodes' option.
+%
+% 'node_scores' 
 %                  An array of custom node values, which must match the 
 %                  number of nodes in the graph.  If specified, this option 
 %                  overrides the 'nodes' option.
@@ -48,7 +52,7 @@ function stitch_plot_graph(G, XY, DataSet, gene_names_all, varargin)
 %                  'weights': color edges based on weight (e.g. correlation
 %                   distance in PCA space).
 %
-% 'edges_custom'
+% 'edge_scores'
 %                  An array of custom edge values, which must match the 
 %                  number of edges in the graph.  If specified, this option 
 %                  overrides the 'edges' option.
@@ -60,26 +64,28 @@ function stitch_plot_graph(G, XY, DataSet, gene_names_all, varargin)
 %% PARAMETER SETTINGS
 % Set defaults
 def.nodes = 'timepoint';
+def.node_rgb = [];
 def.node_color_scale = 'log';
 def.node_size = 0.8;
 def.hide_zero_count_nodes = true;
 def.edges = 'alpha';
 def.edge_color_scale = 'linear';
-def.nodes_custom = [];
-def.edges_custom = []; 
+def.node_scores = [];
+def.edge_scores = []; 
 
 % Create parser object
 parserObj = inputParser;
 parserObj.FunctionName = 'stitch_plot_graph';
 parserObj.StructExpand = false; 
 parserObj.addOptional('nodes',def.nodes);
+parserObj.addOptional('node_rgb',def.node_rgb);
 parserObj.addOptional('node_color_scale',def.node_color_scale);
 parserObj.addOptional('node_size',def.node_size);
 parserObj.addOptional('hide_zero_count_nodes',def.hide_zero_count_nodes);
 parserObj.addOptional('edges',def.edges);
 parserObj.addOptional('edge_color_scale',def.edge_color_scale);
-parserObj.addOptional('nodes_custom',def.nodes_custom);
-parserObj.addOptional('edges_custom',def.edges_custom);
+parserObj.addOptional('node_scores',def.node_scores);
+parserObj.addOptional('edge_scores',def.edge_scores);
 
 % Parse input options
 parserObj.parse(varargin{:});
@@ -88,7 +94,7 @@ settings = parserObj.Results;
 
 %% CODE
 % make the base figure
-figure
+% figure
 set(gca,'Position',[0.05 0.05 0.9 0.9])
 set(gcf,'Color','[0.98 0.98 0.98]');
 p = plot(G, 'XData', XY(:,1), 'YData', XY(:,2));
@@ -98,13 +104,16 @@ axis off
 % create empty containers for node and edge data
 NodeCData_tmp = [];
 EdgeCData_tmp = [];
-
-% custom node/edge scores override other options
-if ~isempty(settings.nodes_custom)
-    settings.nodes = 'custom';
+    
+% custom node/edge scores or rgb values override other options
+if ~isempty(settings.node_scores)
+    settings.nodes = 'scores';
 end
-if ~isempty(settings.edges_custom)
-    settings.edges = 'custom';
+if ~isempty(settings.node_rgb)
+    settings.nodes = 'rgb';
+end
+if ~isempty(settings.edge_scores)
+    settings.edges = 'scores';
 end
 
 % format nodes
@@ -115,9 +124,6 @@ switch settings.nodes
         colormap jet
         settings.node_color_scale = 'linear';
         title('Timepoints')       
-                
-    case 'black' % COLOR ALL NODES BLACK
-        set(p, 'NodeColor', 'k')
         
     case 'none' % HIDE NODES
         set(p, 'NodeColor', 'none')
@@ -153,13 +159,19 @@ switch settings.nodes
         colormap jet
         title('Centrality: Pagerank')
     
-    case 'custom' % COLOR NODES ACCORDING TO CUSTOM VALUES
-        NodeCData_tmp = settings.nodes_custom;      
+    case 'rgb'  
+        if any(settings.node_rgb>1)
+            settings.node_rgb = settings.node_rgb / 255;
+        end
+        p.NodeColor = settings.node_rgb; 
+        
+    case 'scores' % COLOR NODES ACCORDING TO CUSTOM SCORES
+        NodeCData_tmp = settings.node_scores;      
         if settings.hide_zero_count_nodes
             nodes_with_zero_counts = find(NodeCData_tmp == 0);
             highlight(p, nodes_with_zero_counts, 'MarkerSize', 0.01)  
         end
-        
+       
     otherwise % COLOR NODES BY COUNTS OF A SPECIFIC GENE
         gene_ind = strcmp(gene_names_all, settings.nodes);
         cell_ind = str2num(cell2mat(G.Nodes.Name));
@@ -207,7 +219,7 @@ switch settings.edges
         colormap(jet)
         title('Edge Weights')
         
-    case 'custom' % COLOR EDGES ACCORDING TO CUSTOM VALUES
+    case 'scores' % COLOR EDGES ACCORDING TO CUSTOM SCORES
         set(p, 'EdgeColor', 'black', 'EdgeAlpha', 0.2, 'Linewidth', 0.5)
         EdgeCData_tmp = settings.edge_custom;
         colormap((jet))
