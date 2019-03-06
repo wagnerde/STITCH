@@ -61,3 +61,6 @@ graph_to_dot(adjacency(G_cg_scaff), 'directed', 0, 'filename', 'gephi/Wagner2018
 %% (9) Plot coarse-grained graph
 XY_cg = import_gephi_xy('gephi/Wagner2018_cg.net');
 figure; stitch_plot_graph_cg(G_cg, XY_cg, [], [], 'node_size', 5)
+
+%% (10) Export STITCH graph to text files
+stitch_export('export_directory', DataSet, G, XY, gene_names_all)
