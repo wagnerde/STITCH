@@ -118,7 +118,13 @@ if ~isempty(settings.edge_scores)
     settings.edges = 'scores';
 end
 
-% format nodes
+% label nodes
+labelnode(p, G.Nodes.Name, cellstr(G.Nodes.NodeLabels))
+
+% format node sizes
+p.MarkerSize = 4+30*(G.Nodes.fCells);
+
+% format node colors
 switch settings.nodes
     
     case 'timepoint' % COLOR NODES BY TIMEPOINT
@@ -199,7 +205,7 @@ switch settings.edges
     case 'scaffold'
         set(p, 'EdgeColor', [0.6 0.6 0.6], 'EdgeAlpha', 0.5)
         p.LineWidth = 10*G.Edges.Weights / max(G.Edges.Weights); 
-        highlight(p, rmedge(G, find(~G.Edges.Scaffold)), 'EdgeColor', [0 0 0],'LineWidth', 6)
+        highlight(p, rmedge(G, find(~G.Edges.Scaffold)), 'EdgeColor', [0 0 1])
         
     case 'black' % BLACK EDGES
         set(p, 'EdgeColor', 'black', 'EdgeAlpha', 0.5)

@@ -107,7 +107,9 @@ for j = unique_nodeIDs_in_graph' % ...for each new "CG" node...
     % remove internal/self edges
     nodeID_neighborhood = nodeID_neighborhood(nodeID_neighborhood ~= j);    
     % remove any edges to the "unannotated" / NaN node_ID
-    nodeID_neighborhood = nodeID_neighborhood(nodeID_neighborhood ~= unannotated_node_ID);   
+    if ~isempty(unannotated_node_ID)
+        nodeID_neighborhood = nodeID_neighborhood(nodeID_neighborhood ~= unannotated_node_ID);   
+    end
     % count all unique outgoing (non-self) edges
     non_self_targets = unique(nodeID_neighborhood);
     nOriginalEdges = histc(nodeID_neighborhood, non_self_targets);
@@ -126,7 +128,6 @@ end
 % build a coarse-grained node table
 CG_NodeTable = [];
 CG_NodeTable = table(unique_nodeIDs_in_graph, unique_node_names_in_graph, CG_node_sizes, nodeID_times_adj', nodeID_times_adj', nOriginalEdges_for_this_NodeID', 'VariableNames', {'Name', 'NodeLabels', 'nCells', 'Timepoint', 'OriginalDataSet', 'nOriginalOutgoingEdges'});
-CG_NodeTable.Name = ((CG_NodeTable.Name));
 
 % calculate fraction of cells from each timepoint w/ each node_ID
 unique_nodeID_times = unique(nodeID_times_adj);

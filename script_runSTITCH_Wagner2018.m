@@ -17,6 +17,7 @@ load('WagnerScience2018.mat')
 
 %% (3) Add scTools functions to Matlab path
 addpath('scTools')
+addpath('scTools/stitch')
 
 %% (4) Perform total counts normalization 
 nTimePoints = length(DataSet);
@@ -57,6 +58,7 @@ for j = nTimePoints:-1:1
 end
 [G_cg, G_cg_scaff] = stitch_coarse_grain(G, index_to_graph(G, node_IDs));
 graph_to_dot(adjacency(G_cg_scaff), 'directed', 0, 'filename', 'gephi/Wagner2018_cg.dot')
+%adj2gephilab('gephi/Wagner2018_cg_weights', get_weighted_adjacency_matrix(G_cg));
 
 %% (9) Plot coarse-grained graph
 XY_cg = import_gephi_xy('gephi/Wagner2018_cg.net');
