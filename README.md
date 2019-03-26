@@ -169,17 +169,14 @@ OPTIONAL INPUTS:
 
 ### Coarse-Graining the STITCH Graph ###
 
-The STITCH graph may be simplified via a process called 'coarse-graining'.  In the coarse-grained graph, nodes correspond to  clusters of cells (specified by node_IDs), and edges reflect the connectivity of two clusters (the proportion of original shared single-cell edges to total outgoing edges).  Through the coarse-grained graph, a spanning tree "scaffold" is then traced, which highlights the strongest set of edges that bridge clusters between timepoints.
+The STITCH graph may be simplified via a process called 'coarse-graining'.  In the coarse-grained graph, nodes correspond to  clusters of cells (specified by node IDs), and edges reflect the connectivity of two clusters (the proportion of original shared single-cell edges to total outgoing edges).  Through the coarse-grained graph, a spanning tree "scaffold" is then traced, which highlights the strongest set of edges bridging the clusters between timepoints.  As above, Gephi can be used to interactively render a graph layout.
 
 ```
-  node_IDs = [];
-  for j = nTimePoints:-1:1
-      node_IDs = [node_IDs; string(DataSet(j).celldata.cell_IDs_names)]; 
-  end
-  [G_cg, G_cg_scaff] = stitch_coarse_grain(G, index_to_graph(G, node_IDs));
+  node_IDs = stitch_celldata_to_nodeID(DataSet, G, 'cell_IDs_names');
+  [G_cg, G_cg_scaff] = stitch_coarse_grain(G, node_IDs);
   graph_to_dot(adjacency(G_cg_scaff), 'directed', 0, 'filename', 'gephi/Wagner2018_cg.dot')
 ```
-Plot the Coarse-grained graph, again using imported Gephi coordinates.
+Plot the coarse-grained graph using imported Gephi coordinates.
 ```
   XY_cg = import_gephi_xy('gephi/Wagner2018_cg.net');
   figure; stitch_plot_graph_cg(G_cg, XY_cg, [], [], 'node_size', 5)
