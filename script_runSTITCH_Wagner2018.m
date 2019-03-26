@@ -52,13 +52,9 @@ XY = import_gephi_xy('gephi/Wagner2018_stitch.net');
 figure; stitch_plot_graph(G, XY)
 
 %% (8) Specify node_IDs and perform graph coarse-graining
-node_IDs = [];
-for j = nTimePoints:-1:1
-    node_IDs = [node_IDs; string(DataSet(j).celldata.cell_IDs_names)]; 
-end
-[G_cg, G_cg_scaff] = stitch_coarse_grain(G, index_to_graph(G, node_IDs));
+node_IDs = stitch_celldata_to_nodeID(DataSet, G, 'cell_IDs_names');
+[G_cg, G_cg_scaff] = stitch_coarse_grain(G, node_IDs);
 graph_to_dot(adjacency(G_cg_scaff), 'directed', 0, 'filename', 'gephi/Wagner2018_cg.dot')
-%adj2gephilab('gephi/Wagner2018_cg_weights', get_weighted_adjacency_matrix(G_cg));
 
 %% (9) Plot coarse-grained graph
 XY_cg = import_gephi_xy('gephi/Wagner2018_cg.net');
