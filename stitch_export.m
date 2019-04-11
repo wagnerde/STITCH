@@ -36,15 +36,15 @@ writetable(cell2table(gene_names), [path '/' 'genes.txt'],'WriteVariableNames',0
 tmp_cell_ind = str2num(cell2mat(G.Nodes.Name));
 
 % export counts matrix
-disp('Exporting counts matrix...')
-tmp_X = [];
-nTimePoints = length(DataSet);
-for j = nTimePoints:-1:1
-    tmp_X = [tmp_X DataSet(j).X]; 
-end
-tmp_X = tmp_X(:,tmp_cell_ind);
-dlmwrite([path '/' 'counts.csv'], full(tmp_X)',',')
-clear tmp_X
+% disp('Exporting counts matrix...')
+% tmp_X = [];
+% nTimePoints = length(DataSet);
+% for j = nTimePoints:-1:1
+%     tmp_X = [tmp_X DataSet(j).X]; 
+% end
+% tmp_X = tmp_X(:,tmp_cell_ind);
+% dlmwrite([path '/' 'counts.csv'], full(tmp_X)',',')
+% clear tmp_X
 
 % export flags for each annotation column in DataSet.celldata
 disp('Exporting annotations...')
