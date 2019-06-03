@@ -205,7 +205,7 @@ G_cg.Edges.Scaffold = ismember(G_cg.Edges.UniqueID, G_cg_scaff.Edges.UniqueID);
 G_cg = rmedge(G_cg, find(~G_cg.Edges.Scaffold & ~G_cg.Edges.WeakRmvd));
 
 % isolate the 'giant' component (connected component #1)
-G_cg = filter_giant_component(G_cg);
-G_cg_scaff = filter_giant_component(G_cg_scaff);
+G_cg = filter_graph_giant_component(G_cg);
+G_cg_scaff = filter_graph_giant_component(G_cg_scaff);
 
 
