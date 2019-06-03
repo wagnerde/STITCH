@@ -18,6 +18,7 @@ load('WagnerScience2018.mat')
 %% (3) Add scTools functions to Matlab path
 addpath('scTools')
 addpath('scTools/stitch')
+addpath('scTools/generic')
 
 %% (4) Perform total counts normalization 
 nTimePoints = length(DataSet);

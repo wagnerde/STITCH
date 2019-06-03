@@ -16,8 +16,9 @@ function nSig_PCs = get_nSig_PCs(X, gene_ind, nRandTrials)
 % nRandTrials:      Number of randomizations to use to generate random matrix
 %                   eigenvalues
 
-%% SETTINGS:
+%% SETTINGS & PATHS
 show_plot = true;
+addpath('scTools/generic')
 
 %% PERFORM PCA ON STANDARDIZED EXPRESSION VALUES:
 z = full(zscore(X(gene_ind,:)')');

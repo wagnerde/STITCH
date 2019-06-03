@@ -93,7 +93,8 @@ function [v_scores, FF_gene, mu_gene, CV_eff, CV_input, a, b, ax_CV, ax_FF] = ge
 % 'saturation_v'    : If plotting, this sets the value of the v-score at
 %                     which the color bar saturates. Default = 10. Set to
 %                     very large or to Inf to remove saturation.
-
+%% PATHS
+addpath('scTools/generic')
 
 %% DEFAULTS 
 % Set defaults

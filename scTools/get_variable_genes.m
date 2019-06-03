@@ -86,6 +86,9 @@ function var_gene_ind = get_variable_genes(DataSet, varargin)
 % var_gene_ind    Row indices of highly variable genes
 %
 
+%% PATHS
+addpath('scTools/generic')
+
 %% PARAMETER SETTINGS
 % Set defaults
 def.topVarGenes = 2000;

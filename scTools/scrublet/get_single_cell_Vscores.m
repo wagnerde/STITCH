@@ -90,6 +90,8 @@ function [v_scores, CV_eff, CV_input, ax_CV, ax_FF] = get_single_cell_Vscores(X_
 %                     which the color bar saturates. Default = 10. Set to
 %                     very large or to Inf to remove saturation.
 
+%% PATHS
+addpath('scTools/generic')
 
 %% DEFAULTS 
 % Set defaults
