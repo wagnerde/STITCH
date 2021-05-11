@@ -181,7 +181,7 @@ figure('position',[400  400 400 400])
 p = loglog(mu_gene, FF_gene, '.', 'MarkerEdgeColor', [0.8 0.8 0.8]); noLegend(p);
 hold on
 
-% highlight subset of points
+% highlight subset of points corresponding to variable genes
 var_gene_flag = false(length(full(mu_gene)),1); var_gene_flag(full(var_gene_ind)) = true;
 p2 = loglog(mu_gene(var_gene_flag), FF_gene(var_gene_flag), '.', 'MarkerEdgeColor',[0 0 0]); noLegend(p2);
 
@@ -200,9 +200,20 @@ annotation('textbox',[0.15 0.80 0.3 0.01],'String',['CV_i_n_p_u_t = ', num2str(C
 
 % formatting
 set(gca,'fontsize',12)
-xlabel('Mean Reads per Cell')
+xlabel('Mean Transcripts per Cell')
 ylabel('Gene Fano Factor')
 set(gca,'xlim',[min(mu_gene)*0.2 max(mu_gene)*5],'xtick',10.^(-5:5))
 set(gca,'ylim',[min(FF_gene)*0.2 max(FF_gene)*5],'ytick',10.^(-5:5))
 title(['Gene V-scores: ' DataSet.name], 'Interpreter', 'none')
+
+% highlight a single gene
+highlight_gene_ind = find(matches(settings.allGeneNames,'actb2'));
+p3 = loglog(mu_gene(highlight_gene_ind), FF_gene(highlight_gene_ind), 'o', 'MarkerEdgeColor',[1 0 0], 'MarkerFaceColor',[1 0 0]); noLegend(p3);
+text(mu_gene(highlight_gene_ind)+5,FF_gene(highlight_gene_ind)-5,'actb2')
+
+% highlight a single gene
+highlight_gene_ind = find(matches(settings.allGeneNames,'eef1a1l1'));
+p3 = loglog(mu_gene(highlight_gene_ind), FF_gene(highlight_gene_ind), 'o', 'MarkerEdgeColor',[0 0 1], 'MarkerFaceColor',[0 0 1]); noLegend(p3);
+text(mu_gene(highlight_gene_ind)+5,FF_gene(highlight_gene_ind)-0.5,'eef1a1l1')
+
 
